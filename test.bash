@@ -6,7 +6,7 @@
 
 # テスト失敗時の処理
 ng() {
-    echo "${1}行目が失敗しました: 出力='$out',期待値='$expected'"
+    echo ${1}行目が失敗しました
     res=1
 }
 
@@ -43,10 +43,10 @@ expected=$'水曜 1.数値解析学1 2.数値解析学1 3.センサ工学 4.セ�
 [ "$(normalize_output "$out")" = "$(normalize_output "$expected")" ] || ng "$LINENO"
 
 ### テストの結果を出力 ###
-if [ "$res" -eq 0 ]; then
+if [ $res -eq 0 ]; then
     echo "すべてのテストを通過しました！"
 else
     echo "テストに失敗しました。"
 fi
 
-exit "$res"
+exit $res
