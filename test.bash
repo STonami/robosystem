@@ -23,9 +23,7 @@ out=$(echo -e "水\n金" | ./timetable)
 金曜 1.なし 2.信号処理論 3.信号処理論 4.なし 5.遊びと社会 6.遊びと社会 7.英語表現3a 8.英語表現3a 9.なし 10.なし" ] || ng "$LINENO"
 
 out=$(./timetable 2>&1)
-if ! echo "${out}" | grep -q "使い方: ./timetable <曜日> または echo <曜日> | ./timetable"; then
-    ng "$LINENO"
-fi
+[ "${out}" = "エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。" ] || ng "$LINENO"
 
 
 [ "${res}" = 0 ] && echo "OK"
