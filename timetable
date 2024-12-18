@@ -6,37 +6,32 @@ import sys
 
 # 時間割データ
 timetable = {
-    "月": ["なし", "なし", "なし", "ロボット設計製作論3", "ロボット設計製作論3", "ロボット設計製作論3", "ロボット設計製作論3", "なし", "なし", "なし"],
-    "火": ["英語理解4a", "英語理解4a", "なし", "なし", "なし", "未来ロボティクス総合セミナー", "未来ロボティクス総合セミナー", "なし", "なし", "なし"],
-    "水": ["数値解析学1", "数値解析学1", "センサ工学", "センサ工学", "なし", "なし", "なし", "なし", "なし", "なし"],
-    "木": ["なし", "なし", "ロボットシステム学", "ロボットシステム学", "なし", "なし", "なし", "なし", "なし", "なし"],
-    "金": ["なし", "信号処理論", "信号処理論", "なし", "遊びと社会", "遊びと社会", "英語表現3a", "英語表現3a", "なし", "なし"],
+    "月": "月曜 1.なし 2.なし 3.なし 4.ロボット設計製作論3 5.ロボット設計製作論3 6. ロボット設計製作論3 7.ロボット設計製作論3 8.なし 9.なし 10.なし",
+    "火": "火曜 1.英語理解4a 2.英語理解4a 3.なし 4.なし 5.なし 6.未来ロボティクス総 合セミナー 7.未来ロボティクス総合セミナー 8.なし 9.なし 10.なし",
+    "水": "水曜 1.数値解析学1 2.数値解析学1 3.センサ工学 4.センサ工学 5.なし 6.なし 7.なし 8.なし 9.なし 10.なし",
+    "木": "木曜 1.なし 2.なし 3.ロボットシステム学 4.ロボットシステム学 5.なし 6.なし 7.なし 8.なし 9.なし 10.なし",
+    "金": "金曜 1.なし 2.信号処理論 3.信号処理論 4.なし 5.遊びと社会 6.遊びと社会 7.英語表現3a 8.英語表現3a 9.なし 10.なし",
 }
-
-# 時間割を出力する関数
-def print_timetable(day):
-    if day not in timetable:
-        print("エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。", file=sys.stderr)
-        sys.exit(1)
-
-    schedule = timetable[day]
-    print(f"{day}曜 1.{schedule[0]} 2.{schedule[1]} 3.{schedule[2]} 4.{schedule[3]} 5.{schedule[4]} 6.{schedule[5]} 7.{schedule[6]} 8.{schedule[7]} 9.{schedule[8]} 10.{schedule[9]}")
 
 # メイン処理
 def main():
-    # 引数が指定されている場合
-    if len(sys.argv) == 2:
-        day = sys.argv[1].strip()
-        print_timetable(day)
-    # 標準入力がある場合
-    elif not sys.stdin.isatty():
-        for line in sys.stdin:
-            day = line.strip()
-            print_timetable(day)
-    # 引数も標準入力もない場合
+    # 標準入力からすべての行を取得
+    if not sys.stdin.isatty():
+        lines = sys.stdin.read().strip().splitlines()
+    elif len(sys.argv) > 1:
+        lines = [sys.argv[1]]
     else:
-        print("使い方: ./timetable <曜日> または echo <曜日> | ./timetable", file=sys.stderr)
-        sys.exit(1)
+        print("エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。")
+        return
+
+    # 各行を処理
+    for line in lines:
+        line = line.strip()
+        if line in timetable:
+            print(timetable[line])
+        else:
+            print("エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。")
 
 if __name__ == "__main__":
     main()
+
