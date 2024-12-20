@@ -42,5 +42,8 @@ out=$(echo 木 | ./timetable)
 out=$(echo 金 | ./timetable)
 [ "${out}" = "金曜 1.なし 2.信号処理論 3.信号処理論 4.なし 5.遊びと社会 6.遊びと社会 7.英語表現3a 8.英語表現3a 9.なし 10.なし" ] || ng "$LINENO"
 
+out=$(echo 土 | ./timetable 2>&1)
+[ "${out}" = "エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。" ] || ng "$LINENO"
+
 [ "${res}" = 0 ] && echo "OK"
 exit $res
