@@ -15,7 +15,7 @@ out=$(./timetable 月)
 out=$(./timetable 土 2>&1)
 [ "${out}" = "エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。" ] || ng "$LINENO"
 
-out=$(./timetable 2>&1)
+out=$(./timetable   2>&1)
 [ "${out}" = "エラー: 有効な曜日を指定してください。月、火、水、木、金のいずれかを入力してください。" ] || ng "$LINENO"
 
 out=$(echo 火 | ./timetable)
